@@ -1,8 +1,19 @@
-- task: Npm@1
-  inputs:
-    command: 'install'
-- task: Npm@1
-  inputs:
-    command: 'custom'
-    customCommand: 'run test'
+trigger:
+- main # or the branch you want to trigger the pipeline
 
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+  displayName: 'Install npm dependencies'
+
+- script: |
+    npm run test
+  displayName: 'Run Cypress tests'
