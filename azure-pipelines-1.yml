@@ -1,5 +1,8 @@
 trigger:
-- main # or the branch you want to trigger the pipeline
+- main  # or the branch you want to trigger the pipeline
+
+pr:
+- '*'
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -12,8 +15,5 @@ steps:
 
 - script: |
     npm install
-  displayName: 'Install npm dependencies'
-
-- script: |
-    npm run test
+    npm run cypress:run  # Assuming you have a script named "cypress:run" in your package.json
   displayName: 'Run Cypress tests'
