@@ -35,8 +35,7 @@ jobs:
       - script: npm ci
         displayName: 'Install NPM dependencies'
 
-      - script: npx cypress run --record --parallel --ci-build-id $BUILD_BUILDNUMBER
+      - script: npx cypress run --record --key ee5b9790-a371-4a3a-9e07-9bb7d5466850
         # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
         # in Azure DevOps → Your Pipeline → Edit → Variables
-        env:
-          CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
+    
