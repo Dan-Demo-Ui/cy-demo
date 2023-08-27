@@ -35,11 +35,8 @@ jobs:
       - script: npm ci
         displayName: 'Install NPM dependencies'
 
-      - script: npm run test
-        displayName: 'test script'
-
-      # The next command starts the server and runs Cypress end-to-end tests against it.
-      # The test artifacts (video, screenshots, test output) will be uploaded to Cypress Cloud
-      # To record on Cypress Cloud we need to set CYPRESS_RECORD_KEY environment variable
-      - script: npm run test:ci:record
-        displayName: 'Run Cypress tests'
+      - script: npx cypress run --record --parallel --ci-build-id $BUILD_BUILDNUMBER
+        # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
+        # in Azure DevOps → Your Pipeline → Edit → Variables
+        env:
+          CYPRESS_RECORD_KEY: $(CYPRESS_RECORD_KEY)
