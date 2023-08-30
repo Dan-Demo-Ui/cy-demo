@@ -8,7 +8,7 @@ schedules:
 jobs:
 - job: Cypress_e2e_tests
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: 'macos-latest'
   steps:
     - task: NodeTool@0
       inputs:
