@@ -22,12 +22,7 @@ jobs:
         restoreKeys: npm | $(Agent.OS) | package-lock.json
       displayName: Cache NPM packages
 
-    - task: CacheBeta@2  # Use CacheBeta@2 task
-      inputs:
-        key: cypress | $(Agent.OS) | package-lock.json
-        path: $(Pipeline.Workspace)/.cache/Cypress  # Use $(Pipeline.Workspace) for a consistent workspace path
-        restoreKeys: cypress | $(Agent.OS) | package-lock.json
-      displayName: Cache Cypress binary
+
 
     - script: npm ci
       displayName: 'Install NPM dependencies'
