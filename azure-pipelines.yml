@@ -15,17 +15,17 @@ jobs:
         versionSpec: '18.x'
       displayName: 'Install Node.js'
 
-    - task: CacheBeta@1
+    - task: CacheBeta@2  # Use CacheBeta@2 task
       inputs:
         key: npm | $(Agent.OS) | package-lock.json
-        path: /home/vsts/.npm
+        path: $(Pipeline.Workspace)/.npm  # Use $(Pipeline.Workspace) for a consistent workspace path
         restoreKeys: npm | $(Agent.OS) | package-lock.json
       displayName: Cache NPM packages
 
-    - task: CacheBeta@1
+    - task: CacheBeta@2  # Use CacheBeta@2 task
       inputs:
         key: cypress | $(Agent.OS) | package-lock.json
-        path: /home/vsts/.cache/Cypress
+        path: $(Pipeline.Workspace)/.cache/Cypress  # Use $(Pipeline.Workspace) for a consistent workspace path
         restoreKeys: cypress | $(Agent.OS) | package-lock.json
       displayName: Cache Cypress binary
 
