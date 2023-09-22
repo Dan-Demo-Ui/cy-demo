@@ -1,5 +1,5 @@
 schedules:
-- cron: "*/10 * * * *"
+- cron: "0 6 * * *"
   displayName: Every_10_Minutes
   branches:
     include:
