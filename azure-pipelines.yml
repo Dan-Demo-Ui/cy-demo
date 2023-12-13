@@ -15,13 +15,6 @@ jobs:
         versionSpec: '18.x'
       displayName: 'Install Node.js'
 
-    - task: CacheBeta@2  # Use CacheBeta@2 task
-      inputs:
-        key: npm | $(Agent.OS) | package-lock.json
-        path: $(Pipeline.Workspace)/.npm  # Use $(Pipeline.Workspace) for a consistent workspace path
-        restoreKeys: npm | $(Agent.OS) | package-lock.json
-      displayName: Cache NPM packages
-
 
 
     - script: npm ci
