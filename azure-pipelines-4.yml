@@ -1,0 +1,30 @@
+schedules:
+- cron: "0 6 * * *"
+  displayName: Every_10_Minutes
+  branches:
+    include:
+    - '*'
+
+jobs:
+- job: Cypress_e2e_tests
+  pool:
+    vmImage: 'macos-latest'
+  steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '18.x'
+      displayName: 'Install Node.js'
+
+    - task: CacheBeta@2  # Use CacheBeta@2 task
+      inputs:
+        key: npm | $(Agent.OS) | package-lock.json
+        path: $(Pipeline.Workspace)/.npm  # Use $(Pipeline.Workspace) for a consistent workspace path
+        restoreKeys: npm | $(Agent.OS) | package-lock.json
+      displayName: Cache NPM packages
+
+
+
+    - script: npm ci
+      displayName: 'Install NPM dependencies'
+
+    - script: npm run test
